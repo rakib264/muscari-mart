@@ -184,7 +184,7 @@ export default function AddToCartButton({
 
   const currentSize = sizeStyles[size];
 
-  // Variant-based styling using burnt sienna palette
+  // Variant-based styling using forest green & gold palette
   const variantStyles = {
     'default': 'bg-primary hover:bg-primary-700 text-primary-foreground shadow-sm hover:shadow-md',
     'compact': 'bg-primary hover:bg-primary-700 text-primary-foreground shadow-sm',

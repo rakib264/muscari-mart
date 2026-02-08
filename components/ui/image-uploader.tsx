@@ -98,8 +98,8 @@ export function ImageUploader({
               onError={(e) => {
                 // Fallback to default logo if image fails to load
                 const target = e.target as HTMLImageElement;
-                if (label === 'Primary Logo' && target.src !== '/wellrise.png') {
-                  target.src = '/wellrise.png';
+                if (label === 'Primary Logo' && target.src !== '/muscarimart.png') {
+                  target.src = '/muscarimart.png';
                 } else if (label === 'Secondary Logo' && target.src !== '/logo.png') {
                   target.src = '/logo.png';
                 }
@@ -136,7 +136,7 @@ export function ImageUploader({
           <div className="relative w-40 h-32 border-2 border-dashed border-gray-300 rounded-lg overflow-hidden bg-gray-50">
             {(label === 'Primary Logo' || label === 'Secondary Logo') ? (
               <img
-                src={label === 'Primary Logo' ? '/wellrise.png' : '/logo.png'}
+                src={label === 'Primary Logo' ? '/muscarimart.png' : '/logo.png'}
                 alt={`Default ${label}`}
                 className="w-full h-full object-contain p-3 opacity-60"
               />

@@ -167,17 +167,17 @@ export const responsiveText = {
   },
 } as const;
 
-// Enhanced color combinations for text - aligned with burnt sienna theme
+// Enhanced color combinations for text - aligned with forest green & gold theme
 export const textColors = {
   // Primary text colors using theme-aware classes
   primary: 'text-foreground',                    // Main text color (theme-aware)
   secondary: 'text-muted-foreground',            // Secondary text (theme-aware)
   muted: 'text-muted-foreground/70',             // Muted text (theme-aware)
 
-  // Brand colors using the burnt sienna palette
+  // Brand colors using the forest green & gold palette
   brand: {
-    primary: 'text-primary-600',                 // Burnt sienna
-    secondary: 'text-secondary-600',             // Saddle brown
+    primary: 'text-primary-600',                 // Deep forest green
+    secondary: 'text-secondary-600',             // Metallic gold
     beige: 'text-beige-600',                     // Beige accent
     sandy: 'text-sandy-600',                     // Sandy brown
   },
@@ -193,7 +193,7 @@ export const textColors = {
   white: 'text-white',
   inverse: 'text-background',
 
-  // Enhanced gradients using burnt sienna palette
+  // Enhanced gradients using forest green & gold palette
   gradient: {
     primary: 'bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent',
     warm: 'bg-gradient-to-r from-primary-500 via-sandy-500 to-secondary-500 bg-clip-text text-transparent',

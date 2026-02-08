@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
-import MobileBottomNav from '@/components/layout/MobileBottomNav';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { useSettings } from '@/hooks/use-settings';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { motion } from 'framer-motion';
-import { ArrowRight, Eye, EyeOff, Lock, Mail } from 'lucide-react';
-import { getSession, signIn } from 'next-auth/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import * as Yup from 'yup';
-import WellRiseLogo from "@/lib/assets/images/wellrise.png"
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useSettings } from "@/hooks/use-settings";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { motion } from "framer-motion";
+import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { getSession, signIn } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
+import WellRiseLogo from "@/lib/assets/images/muscarimart.jpg";
 
 interface AuthSettings {
   googleAuthEnabled: boolean;
@@ -33,17 +33,17 @@ interface SignInFormValues {
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
+    .email("Invalid email address")
+    .required("Email is required"),
   password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
-    .required('Password is required'),
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
 });
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [authSettings, setAuthSettings] = useState<AuthSettings>({
     googleAuthEnabled: false,
     facebookAuthEnabled: false,
@@ -56,82 +56,88 @@ export default function SignIn() {
   const { siteName, logo1 } = settings ?? {};
 
   const initialValues: SignInFormValues = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
 
   useEffect(() => {
     // Fetch authentication settings
     const fetchAuthSettings = async () => {
       try {
-        const response = await fetch('/api/auth-settings');
+        const response = await fetch("/api/auth-settings");
         if (response.ok) {
           const settings = await response.json();
           setAuthSettings(settings);
         }
       } catch (error) {
-        console.error('Failed to fetch auth settings:', error);
+        console.error("Failed to fetch auth settings:", error);
       }
     };
 
     fetchAuthSettings();
   }, []);
 
-  const handleSubmit = async (values: SignInFormValues, { setSubmitting }: any) => {
+  const handleSubmit = async (
+    values: SignInFormValues,
+    { setSubmitting }: any,
+  ) => {
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
 
       if (result?.error) {
-        setError('Invalid credentials');
+        setError("Invalid credentials");
       } else if (result?.ok) {
         // Wait a bit for session to be established
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         // Force session refresh
         const session = await getSession();
 
-        if (session?.user?.role === 'admin' || session?.user?.role === 'manager') {
+        if (
+          session?.user?.role === "admin" ||
+          session?.user?.role === "manager"
+        ) {
           // Use window.location for admin redirect to ensure proper navigation
-          window.location.href = '/admin';
+          window.location.href = "/admin";
         } else {
           // Use router.push for regular users
-          router.push('/');
+          router.push("/");
         }
       } else {
-        setError('Authentication failed. Please try again.');
+        setError("Authentication failed. Please try again.");
       }
     } catch (error) {
-      console.error('Sign in error:', error);
-      setError('Something went wrong. Please try again.');
+      console.error("Sign in error:", error);
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
       setSubmitting(false);
     }
   };
 
-  const handleSocialSignIn = async (provider: 'google' | 'facebook') => {
+  const handleSocialSignIn = async (provider: "google" | "facebook") => {
     try {
       // Get the current URL for callback
       const currentUrl = window.location.origin;
-      const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl') || '/';
+      const callbackUrl =
+        new URLSearchParams(window.location.search).get("callbackUrl") || "/";
 
       await signIn(provider, {
         callbackUrl: `${currentUrl}${callbackUrl}`,
-        redirect: true
+        redirect: true,
       });
     } catch (error) {
-      console.error('Social sign-in error:', error);
-      setError('Social sign-in failed. Please try again.');
+      console.error("Social sign-in error:", error);
+      setError("Social sign-in failed. Please try again.");
     }
   };
-
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-50 via-white to-secondary-50">
@@ -150,7 +156,13 @@ export default function SignIn() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="w-full"
             >
-              <Card className="shadow-2xl w-full mx-auto bg-white/90 backdrop-blur-sm border-[1px] border-primary-200 shadow-primary-200" style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)' }}>
+              <Card
+                className="shadow-2xl w-full mx-auto bg-white/90 backdrop-blur-sm border-[1px] border-primary-200 shadow-primary-200"
+                style={{
+                  boxShadow:
+                    "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)",
+                }}
+              >
                 <CardHeader className="text-center pb-4 sm:pb-6 md:pb-8 px-4 sm:px-6 md:px-8 pt-6 sm:pt-8">
                   <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
@@ -163,7 +175,7 @@ export default function SignIn() {
                         <div className="relative flex items-center justify-center">
                           <Image
                             src={logo1}
-                            alt={siteName || 'Muscari Mart'}
+                            alt={siteName || "Muscari Mart"}
                             width={120}
                             height={40}
                             className="h-8 sm:h-10 w-auto object-contain relative z-10"
@@ -174,7 +186,7 @@ export default function SignIn() {
                         <div className="relative flex items-center justify-center">
                           <Image
                             src={WellRiseLogo?.src}
-                            alt={siteName || 'Muscari Mart'}
+                            alt={siteName || "Muscari Mart"}
                             width={120}
                             height={40}
                             className="h-8 sm:h-10 w-auto object-contain relative z-10"
@@ -194,15 +206,16 @@ export default function SignIn() {
                       Welcome Back
                     </CardTitle>
                     <p className="typography-section-subtitle text-hierarchy-subtitle">
-                      Sign in to your {siteName ?? process.env.NEXT_PUBLIC_SITE_NAME} account
+                      Sign in to your{" "}
+                      {siteName ?? process.env.NEXT_PUBLIC_SITE_NAME} account
                     </p>
                   </motion.div>
                 </CardHeader>
 
-
                 <CardContent className="px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 md:pb-8">
                   {/* Social Authentication Buttons */}
-                  {(authSettings.googleAuthEnabled || authSettings.facebookAuthEnabled) && (
+                  {(authSettings.googleAuthEnabled ||
+                    authSettings.facebookAuthEnabled) && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -213,10 +226,13 @@ export default function SignIn() {
                         <Button
                           type="button"
                           variant="outline"
-                          onClick={() => handleSocialSignIn('google')}
+                          onClick={() => handleSocialSignIn("google")}
                           className="w-full h-11 sm:h-12 text-xs sm:text-sm md:text-base font-medium border-2 border-primary-200 hover:border-primary-300 hover:shadow-lg hover:bg-primary-50 transition-all duration-300 group touch-manipulation"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-200" viewBox="0 0 24 24">
+                          <svg
+                            className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-200"
+                            viewBox="0 0 24 24"
+                          >
                             <path
                               fill="#4285F4"
                               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -242,11 +258,15 @@ export default function SignIn() {
                         <Button
                           type="button"
                           variant="outline"
-                          onClick={() => handleSocialSignIn('facebook')}
+                          onClick={() => handleSocialSignIn("facebook")}
                           className="w-full h-11 sm:h-12 text-xs sm:text-sm md:text-base font-medium border-2 border-secondary-200 hover:border-secondary-300 hover:shadow-lg hover:bg-secondary-50 transition-all duration-300 group touch-manipulation"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-200" fill="#1877F2" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          <svg
+                            className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-200"
+                            fill="#1877F2"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                           </svg>
                           Continue with Facebook
                         </Button>
@@ -257,7 +277,9 @@ export default function SignIn() {
                           <span className="w-full border-t border-primary-200" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                          <span className="bg-white px-3 sm:px-4 text-muted-foreground font-medium">Or continue with</span>
+                          <span className="bg-white px-3 sm:px-4 text-muted-foreground font-medium">
+                            Or continue with
+                          </span>
                         </div>
                       </div>
                     </motion.div>
@@ -286,9 +308,17 @@ export default function SignIn() {
                           )}
 
                           <div className="space-y-2 sm:space-y-3">
-                            <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Email Address</label>
+                            <label
+                              htmlFor="email"
+                              className="block text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-2"
+                            >
+                              Email Address
+                            </label>
                             <div className="relative group">
-                              <Mail className="absolute z-10 left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary-600 transition-colors duration-200" size={16} />
+                              <Mail
+                                className="absolute z-10 left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary-600 transition-colors duration-200"
+                                size={16}
+                              />
                               <Field name="email">
                                 {({ field }: any) => (
                                   <Input
@@ -301,19 +331,31 @@ export default function SignIn() {
                                 )}
                               </Field>
                             </div>
-                            <ErrorMessage name="email" component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
+                            <ErrorMessage
+                              name="email"
+                              component="div"
+                              className="text-red-500 text-xs sm:text-sm mt-1"
+                            />
                           </div>
 
                           <div className="space-y-2 sm:space-y-3">
-                            <label htmlFor="password" className="block text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Password</label>
+                            <label
+                              htmlFor="password"
+                              className="block text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-2"
+                            >
+                              Password
+                            </label>
                             <div className="relative group">
-                              <Lock className="absolute z-10 left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary-600 transition-colors duration-200" size={16} />
+                              <Lock
+                                className="absolute z-10 left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary-600 transition-colors duration-200"
+                                size={16}
+                              />
                               <Field name="password">
                                 {({ field }: any) => (
                                   <Input
                                     {...field}
                                     id="password"
-                                    type={showPassword ? 'text' : 'password'}
+                                    type={showPassword ? "text" : "password"}
                                     placeholder="Enter your password"
                                     className="pl-10 sm:pl-12 pr-10 sm:pr-12 h-10 sm:h-12 text-sm sm:text-base border-2 border-primary-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all duration-200 touch-manipulation"
                                   />
@@ -324,10 +366,18 @@ export default function SignIn() {
                                 onClick={() => setShowPassword(!showPassword)}
                                 className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary-600 transition-colors duration-200 touch-manipulation p-1"
                               >
-                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                {showPassword ? (
+                                  <EyeOff size={16} />
+                                ) : (
+                                  <Eye size={16} />
+                                )}
                               </button>
                             </div>
-                            <ErrorMessage name="password" component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
+                            <ErrorMessage
+                              name="password"
+                              component="div"
+                              className="text-red-500 text-xs sm:text-sm mt-1"
+                            />
                           </div>
 
                           <Button
@@ -338,13 +388,20 @@ export default function SignIn() {
                             {loading || isSubmitting ? (
                               <motion.div
                                 animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                transition={{
+                                  duration: 1,
+                                  repeat: Infinity,
+                                  ease: "linear",
+                                }}
                                 className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full"
                               />
                             ) : (
                               <>
                                 Sign In
-                                <ArrowRight className="ml-1 sm:ml-2" size={16} />
+                                <ArrowRight
+                                  className="ml-1 sm:ml-2"
+                                  size={16}
+                                />
                               </>
                             )}
                           </Button>
@@ -360,12 +417,18 @@ export default function SignIn() {
                     className="mt-6 sm:mt-8 text-center"
                   >
                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                      Don't have an account?{' '}
-                      <Link href="/auth/signup" className="text-primary-600 hover:text-primary-700 hover:underline font-semibold transition-colors duration-200 touch-manipulation">
+                      Don't have an account?{" "}
+                      <Link
+                        href="/auth/signup"
+                        className="text-primary-600 hover:text-primary-700 hover:underline font-semibold transition-colors duration-200 touch-manipulation"
+                      >
                         Sign up
                       </Link>
-                      {' • '}
-                      <Link href="/auth/forgot-password" className="text-primary-600 hover:text-primary-700 hover:underline font-semibold transition-colors duration-200 touch-manipulation">
+                      {" • "}
+                      <Link
+                        href="/auth/forgot-password"
+                        className="text-primary-600 hover:text-primary-700 hover:underline font-semibold transition-colors duration-200 touch-manipulation"
+                      >
                         Forgot Password?
                       </Link>
                     </p>

@@ -29,13 +29,13 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [colors, setColors] = useState<ThemeColors>({
-    primaryColor: '#E35336', // Burnt sienna - primary action color
-    secondaryColor: '#A0522D', // Saddle brown - secondary/structural color
+    primaryColor: '#2D5A3D', // Deep forest green - primary action color
+    secondaryColor: '#D4AF37', // Metallic gold - secondary/accent color
   });
   const [loading, setLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Supporting colors for the burnt sienna palette
+  // Supporting colors for the forest green & gold palette
   const supportingColors = {
     beige: '#F5F5DC',     // Beige - light backgrounds and subtle accents
     sandyBrown: '#F4A460', // Sandy brown - hover states and section differentiation
@@ -115,12 +115,12 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       const beigePalette = generateColorPalette(supportingColors.beige);
       const sandyBrownPalette = generateColorPalette(supportingColors.sandyBrown);
 
-      // Set primary color variants (Burnt Sienna)
+      // Set primary color variants (Deep Forest Green)
       Object.entries(primaryPalette).forEach(([shade, hsl]) => {
         root.style.setProperty(`--primary-${shade}`, hsl);
       });
 
-      // Set secondary color variants (Saddle Brown)
+      // Set secondary color variants (Metallic Gold)
       Object.entries(secondaryPalette).forEach(([shade, hsl]) => {
         root.style.setProperty(`--secondary-${shade}`, hsl);
       });
@@ -148,21 +148,21 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       // Update ring color to use primary for focus states
       root.style.setProperty('--ring', primaryPalette['600'] || primaryPalette['500']);
 
-      // Update adaptive colors to use the new burnt sienna palette
+      // Update adaptive colors to use the new forest green & gold palette
       if (!isDarkMode) {
-        // Light mode - use beige and light variants
-        root.style.setProperty('--muted', beigePalette['200']); // Light beige for muted backgrounds
-        root.style.setProperty('--accent', sandyBrownPalette['100']); // Light sandy brown for accents
-        root.style.setProperty('--accent-foreground', primaryPalette['800']); // Dark burnt sienna for text
-        root.style.setProperty('--card', beigePalette['50']); // Very light beige for cards
-        root.style.setProperty('--border', sandyBrownPalette['200']); // Light sandy brown for borders
+        // Light mode - use light forest green variants
+        root.style.setProperty('--muted', primaryPalette['50']); // Very light forest green for muted backgrounds
+        root.style.setProperty('--accent', secondaryPalette['100']); // Light gold for accents
+        root.style.setProperty('--accent-foreground', primaryPalette['800']); // Dark forest green for text
+        root.style.setProperty('--card', primaryPalette['50']); // Very light forest green for cards
+        root.style.setProperty('--border', primaryPalette['200']); // Light forest green for borders
       } else {
         // Dark mode - use darker variants
-        root.style.setProperty('--muted', secondaryPalette['800']); // Dark saddle brown
-        root.style.setProperty('--accent', primaryPalette['700']); // Dark burnt sienna
-        root.style.setProperty('--accent-foreground', beigePalette['100']); // Light beige for text
-        root.style.setProperty('--card', secondaryPalette['900']); // Very dark saddle brown
-        root.style.setProperty('--border', sandyBrownPalette['600']); // Medium sandy brown for borders
+        root.style.setProperty('--muted', primaryPalette['800']); // Dark forest green
+        root.style.setProperty('--accent', secondaryPalette['700']); // Dark gold
+        root.style.setProperty('--accent-foreground', primaryPalette['50']); // Light forest green for text
+        root.style.setProperty('--card', primaryPalette['900']); // Very dark forest green
+        root.style.setProperty('--border', primaryPalette['700']); // Dark forest green for borders
       }
 
       // Set background color to use beige in light mode

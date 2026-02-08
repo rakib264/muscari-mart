@@ -64,35 +64,35 @@ const config: Config = {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))',
         },
-        // Primary color system - Burnt Sienna based (#E35336) - FIXED VALUES
+        // Primary color system - Deep Forest Green based (#2D5A3D) - FIXED VALUES
         primary: {
-          DEFAULT: '#E35336', // burnt sienna - MAIN COLOR
+          DEFAULT: '#2D5A3D', // deep forest green - MAIN COLOR
           foreground: '#ffffff',
-          50: '#fef6f5',   // Very light burnt sienna
-          100: '#fceeed',  // Light burnt sienna
-          200: '#f8ddd6',  // Lighter burnt sienna
-          300: '#f1ac97',  // Light-medium burnt sienna
-          400: '#ea8163',  // Medium burnt sienna
-          500: '#E35336',  // Base burnt sienna
-          600: '#E35336',  // burnt sienna (default) - SAME AS MAIN
-          700: '#cc4b31',  // Dark burnt sienna
-          800: '#b5422b',  // Darker burnt sienna
-          900: '#9e3a26',  // Darkest burnt sienna
+          50: '#f8fcf9',   // Very light forest green
+          100: '#f0f8f3',  // Light forest green
+          200: '#dcede3',  // Lighter forest green
+          300: '#b9d6c4',  // Light-medium forest green
+          400: '#86b39a',  // Medium forest green
+          500: '#2D5A3D',  // Base forest green
+          600: '#2D5A3D',  // deep forest green (default) - SAME AS MAIN
+          700: '#244831',  // Dark forest green
+          800: '#1b3625',  // Darker forest green
+          900: '#122419',  // Darkest forest green
         },
-        // Secondary color system - Saddle Brown based (#A0522D) - FIXED VALUES
+        // Secondary color system - Metallic Gold based (#D4AF37) - FIXED VALUES
         secondary: {
-          DEFAULT: '#A0522D', // saddle brown - MAIN COLOR
-          foreground: '#ffffff',
-          50: '#f8f5f2',   // Very light saddle brown
-          100: '#f1ebe4',  // Light saddle brown
-          200: '#e3d7c7',  // Lighter saddle brown
-          300: '#d5c1aa',  // Light-medium saddle brown
-          400: '#ba9770',  // Medium saddle brown
-          500: '#A0522D',  // Base saddle brown
-          600: '#A0522D',  // saddle brown (default) - SAME AS MAIN
-          700: '#904a29',  // Dark saddle brown
-          800: '#804124',  // Darker saddle brown
-          900: '#703920',  // Darkest saddle brown
+          DEFAULT: '#D4AF37', // metallic gold - MAIN COLOR
+          foreground: '#122419', // dark forest green text on gold
+          50: '#fdfbf6',   // Very light gold
+          100: '#fbf6ed',  // Light gold
+          200: '#f7eddb',  // Lighter gold
+          300: '#efdab7',  // Light-medium gold
+          400: '#e3be7b',  // Medium gold
+          500: '#D4AF37',  // Base gold
+          600: '#D4AF37',  // metallic gold (default) - SAME AS MAIN
+          700: '#bf9d31',  // Dark gold
+          800: '#aa8c2c',  // Darker gold
+          900: '#957a26',  // Darkest gold
         },
         // Supporting color system - Beige (#F5F5DC)
         beige: {

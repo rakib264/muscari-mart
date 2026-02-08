@@ -120,8 +120,8 @@ export default function TypographyTest() {
           </div>
           <div className="space-y-3">
             <h3 className="text-lg font-semibold text-gray-700 mb-3">Brand Colors</h3>
-            <div className="text-brand-primary text-body-lg">Brand Primary (Burnt Sienna)</div>
-            <div className="text-brand-secondary text-body-lg">Brand Secondary (Saddle Brown)</div>
+            <div className="text-brand-primary text-body-lg">Brand Primary (Deep Forest Green)</div>
+            <div className="text-brand-secondary text-body-lg">Brand Secondary (Metallic Gold)</div>
             <div className="text-brand-beige text-body-lg">Brand Beige</div>
             <div className="text-brand-sandy text-body-lg">Brand Sandy Brown</div>
           </div>

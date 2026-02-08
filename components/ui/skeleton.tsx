@@ -8,7 +8,7 @@ function Skeleton({
     <div
       className={cn(
         // Consistent skeleton color that matches the theme
-        'animate-pulse rounded-md bg-gray-200',
+        'animate-pulse rounded-md bg-muted',
         className
       )}
       {...props}

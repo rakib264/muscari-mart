@@ -9,10 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary variant - Burnt Sienna (#E35336)
+        // Primary variant - Deep Forest Green (#2D5A3D)
         default: 'bg-primary text-primary-foreground hover:bg-primary-700 hover:shadow-lg focus:ring-primary/50 active:bg-primary-800 shadow-md',
 
-        // Secondary variant - Saddle Brown (#A0522D)
+        // Secondary variant - Metallic Gold (#D4AF37)
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary-700 hover:shadow-lg focus:ring-secondary/50 active:bg-secondary-800 shadow-md',
 
         // Supporting color variants
@@ -26,10 +26,10 @@ const buttonVariants = cva(
         info: 'bg-info text-info-foreground hover:bg-info/90 hover:shadow-lg focus:ring-info/50',
 
         // Outline variants
-        outline: 'border-2 border-primary bg-transparent text-gray-700 hover:bg-primary hover:text-white hover:border-white focus:ring-primary/50 transition-colors',
-        'outline-secondary': 'border-2 border-secondary bg-transparent text-gray-700 hover:bg-secondary hover:text-white hover:border-white focus:ring-secondary/50 transition-colors',
-        'outline-beige': 'border-2 border-beige-400 bg-transparent text-gray-700 hover:bg-beige-100 hover:border-beige-500 focus:ring-beige/50',
-        'outline-sandy': 'border-2 border-sandy bg-transparent text-gray-700 hover:bg-sandy-100 hover:border-sandy-400 focus:ring-sandy/50',
+        outline: 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white hover:border-white focus:ring-primary/50 transition-colors',
+        'outline-secondary': 'border-2 border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground hover:border-white focus:ring-secondary/50 transition-colors',
+        'outline-beige': 'border-2 border-beige-400 bg-transparent text-primary-700 hover:bg-beige-100 hover:border-beige-500 focus:ring-beige/50',
+        'outline-sandy': 'border-2 border-sandy bg-transparent text-primary-700 hover:bg-sandy-100 hover:border-sandy-400 focus:ring-sandy/50',
         'outline-destructive': 'border-2 border-destructive bg-transparent text-destructive hover:bg-destructive hover:text-destructive-foreground focus:ring-destructive/50',
 
         // Ghost variants
@@ -42,7 +42,7 @@ const buttonVariants = cva(
         link: 'bg-transparent text-primary underline-offset-4 hover:underline hover:text-primary-700 focus:ring-primary/50',
         'link-secondary': 'bg-transparent text-secondary underline-offset-4 hover:underline hover:text-secondary-700 focus:ring-secondary/50',
 
-        // Special gradient variants using burnt sienna palette
+        // Special gradient variants using forest green & gold palette
         gradient: 'bg-gradient-to-r from-primary to-secondary text-white hover:from-primary-700 hover:to-secondary-700 hover:shadow-lg focus:ring-primary/50 active:scale-95 shadow-md',
         'gradient-warm': 'bg-gradient-to-r from-sandy to-primary text-white hover:from-sandy-400 hover:to-primary-700 hover:shadow-lg focus:ring-sandy/50 active:scale-95 shadow-md',
         'gradient-earth': 'bg-gradient-to-r from-secondary to-sandy text-white hover:from-secondary-700 hover:to-sandy-400 hover:shadow-lg focus:ring-secondary/50 active:scale-95 shadow-md',

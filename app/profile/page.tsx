@@ -84,9 +84,9 @@ export default function ProfilePage() {
   // Show loading while checking authentication
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-violet-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-primary-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-slate-600">Loading...</p>
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function ProfilePage() {
       if (res.ok) {
         setForm(prev => ({ ...prev, profileImage: data.url }));
         toast({ title: 'Image uploaded', description: 'Profile image updated successfully.', variant: 'success' });
-        
+
         // Automatically save the profile with the new image
         try {
           await saveProfile();
@@ -186,7 +186,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-violet-50">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-primary-100">
       <Header />
       <div className="container mx-auto px-4 py-6 md:py-8 mt-16 md:mt-20 mb-20 md:mb-0">
         {/* Profile Header */}
@@ -199,30 +199,30 @@ export default function ProfilePage() {
 
         <Tabs defaultValue="info" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm border border-slate-200/60 shadow-lg rounded-xl p-1">
-            <TabsTrigger 
-              value="info" 
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-violet-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+            <TabsTrigger
+              value="info"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary-600 data-[state=active]:to-secondary-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <User className="w-4 h-4" />
               <span className="hidden sm:inline">Personal Info</span>
             </TabsTrigger>
-            <TabsTrigger 
+            <TabsTrigger
               value="orders"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-violet-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary-600 data-[state=active]:to-secondary-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <ShoppingBag className="w-4 h-4" />
               <span className="hidden sm:inline">Orders</span>
             </TabsTrigger>
-            <TabsTrigger 
+            <TabsTrigger
               value="returns"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-violet-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary-600 data-[state=active]:to-secondary-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <RotateCcw className="w-4 h-4" />
               <span className="hidden sm:inline">Returns</span>
             </TabsTrigger>
-            <TabsTrigger 
+            <TabsTrigger
               value="wishlist"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-violet-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary-600 data-[state=active]:to-secondary-600 data-[state=active]:text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Heart className="w-4 h-4" />
               <span className="hidden sm:inline">Wishlist</span>
@@ -231,22 +231,22 @@ export default function ProfilePage() {
 
           <TabsContent value="info" className="space-y-6">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white p-8">
-                <CardTitle className="typography-section-title text-white flex items-center">
+              <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
+                <CardTitle className="text-2xl font-semibold flex items-center text-white">
                   <User className="w-6 h-6 mr-3" />
                   Personal Information
                 </CardTitle>
-                <p className="typography-caption text-indigo-100 mt-2">Update your personal details and profile picture</p>
+                <p className="typography-caption text-primary-100 mt-2">Update your personal details and profile picture</p>
               </CardHeader>
               <CardContent className="p-8">
                 {/* Profile Image Section */}
                 <div className="flex flex-col items-center mb-8">
                   <div className="relative group">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center overflow-hidden shadow-lg ring-4 ring-white">
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center overflow-hidden shadow-lg ring-4 ring-white">
                       {form.profileImage && form.profileImage !== '' ? (
-                        <img 
-                          src={form.profileImage} 
-                          alt="Profile" 
+                        <img
+                          src={form.profileImage}
+                          alt="Profile"
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             console.error('Profile image failed to load:', form.profileImage);
@@ -277,7 +277,7 @@ export default function ProfilePage() {
                     )}
                   </div>
                   <div className="mt-4 text-center">
-                    <label className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-lg hover:from-indigo-700 hover:to-violet-700 transition-all duration-300 cursor-pointer shadow-lg">
+                    <label className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 cursor-pointer shadow-lg">
                       <Upload className="w-4 h-4 mr-2" />
                       {uploading ? 'Uploading...' : 'Change Photo'}
                       <input
@@ -300,21 +300,21 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="firstName" className="text-sm font-medium text-slate-700">First Name</Label>
-                      <Input 
-                        id="firstName" 
-                        value={form.firstName} 
+                      <Input
+                        id="firstName"
+                        value={form.firstName}
                         onChange={(e) => setForm(f => ({ ...f, firstName: e.target.value }))}
-                        className="h-12 rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500/20 transition-all duration-300"
+                        className="h-12 rounded-xl border-slate-200 focus:border-primary-500 focus:ring-primary-500/20 transition-all duration-300"
                         placeholder="Enter your first name"
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName" className="text-sm font-medium text-slate-700">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        value={form.lastName} 
+                      <Input
+                        id="lastName"
+                        value={form.lastName}
                         onChange={(e) => setForm(f => ({ ...f, lastName: e.target.value }))}
-                        className="h-12 rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500/20 transition-all duration-300"
+                        className="h-12 rounded-xl border-slate-200 focus:border-primary-500 focus:ring-primary-500/20 transition-all duration-300"
                         placeholder="Enter your last name"
                       />
                     </div>
@@ -322,25 +322,25 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label className="text-sm font-medium text-slate-700">Email Address</Label>
-                      <Input 
-                        value={session?.user?.email || ''} 
-                        disabled 
-                        className="h-12 rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500/20 transition-all duration-300"
+                      <Input
+                        value={session?.user?.email || ''}
+                        disabled
+                        className="h-12 rounded-xl border-slate-200 focus:border-primary-500 focus:ring-primary-500/20 transition-all duration-300"
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone" className="text-sm font-medium text-slate-700">Phone Number</Label>
-                      <Input 
-                        id="phone" 
-                        value={form.phone} 
+                      <Input
+                        id="phone"
+                        value={form.phone}
                         onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))}
-                        className="h-12 rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500/20 transition-all duration-300"
+                        className="h-12 rounded-xl border-slate-200 focus:border-primary-500 focus:ring-primary-500/20 transition-all duration-300"
                         placeholder="Enter your phone number"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4">
-                    <Button 
+                    <Button
                       onClick={handleSignOut}
                       variant="outline"
                       className="border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 px-6 py-3 rounded-xl font-medium transition-all duration-300"
@@ -348,9 +348,9 @@ export default function ProfilePage() {
                       <LogOut className="w-4 h-4 mr-2" />
                       Sign Out
                     </Button>
-                    <Button 
+                    <Button
                       onClick={saveProfile}
-                      className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Save Changes
                     </Button>
@@ -362,7 +362,7 @@ export default function ProfilePage() {
 
           <TabsContent value="orders" className="space-y-6">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white p-8">
+              <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
                 <CardTitle className="text-2xl font-semibold flex items-center text-white">
                   <ShoppingBag className="w-6 h-6 mr-3 white" />
                   Order History
@@ -381,7 +381,7 @@ export default function ProfilePage() {
                     <h3 className="text-lg font-medium text-slate-600 mb-2">No orders yet</h3>
                     <p className="text-slate-500 mb-6">Start shopping to see your orders here</p>
                     <Link href="/products">
-                      <Button className="bg-gradient-to-r from-primary-600 to-emerald-600 hover:from-primary-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl">
+                      <Button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-xl">
                         Start Shopping
                       </Button>
                     </Link>
@@ -396,8 +396,8 @@ export default function ProfilePage() {
                               <span className="font-semibold text-slate-900">#{order.orderNumber}</span>
                               <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                                 order.orderStatus === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                order.orderStatus === 'confirmed' ? 'bg-indigo-100 text-indigo-800' :
-                                order.orderStatus === 'shipped' ? 'bg-purple-100 text-purple-800' :
+                                order.orderStatus === 'confirmed' ? 'bg-primary-100 text-primary-800' :
+                                order.orderStatus === 'shipped' ? 'bg-secondary-100 text-secondary-800' :
                                 order.orderStatus === 'delivered' ? 'bg-primary-100 text-primary-800' :
                                 order.orderStatus === 'cancelled' ? 'bg-red-100 text-red-800' :
                                 'bg-gray-100 text-gray-800'
@@ -418,8 +418,8 @@ export default function ProfilePage() {
                           </div>
                           <div className="flex items-center gap-3">
                             <Link href={`/orders/${order._id}`}>
-                              <Button 
-                                variant="outline" 
+                              <Button
+                                variant="outline"
                                 size="sm"
                                 className="rounded-lg hover:bg-slate-50 transition-colors duration-200"
                               >
@@ -427,9 +427,9 @@ export default function ProfilePage() {
                               </Button>
                             </Link>
                             {['pending','confirmed'].includes(order.orderStatus) && (
-                              <Button 
-                                variant="destructive" 
-                                size="sm" 
+                              <Button
+                                variant="destructive"
+                                size="sm"
                                 onClick={() => cancelOrder(order._id)}
                                 className="rounded-lg hover:bg-red-600 transition-colors duration-200"
                               >
@@ -448,7 +448,7 @@ export default function ProfilePage() {
 
           <TabsContent value="returns" className="space-y-6">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-primary-600 to-violet-600 text-white p-8">
+              <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
                 <CardTitle className="text-2xl text-white font-semibold flex items-center">
                   <span className="w-6 h-6 mr-3">↩️</span>
                   Returns & Exchanges
@@ -463,7 +463,7 @@ export default function ProfilePage() {
 
           <TabsContent value="wishlist" className="space-y-6">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-primary-600 to-violet-600 text-white p-8">
+              <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
                 <CardTitle className="text-2xl font-semibold flex items-center text-white">
                   <Heart className="w-6 h-6 mr-3 text-white" />
                   My Wishlist
@@ -477,7 +477,7 @@ export default function ProfilePage() {
                     <h3 className="text-lg font-medium text-slate-600 mb-2">Your wishlist is empty</h3>
                     <p className="text-slate-500 mb-6">Start adding items you love to your wishlist</p>
                     <Link href="/products">
-                      <Button className="bg-gradient-to-r from-primary-600 to-rose-600 hover:from-primary-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl">
+                      <Button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-xl">
                         Browse Products
                       </Button>
                     </Link>
@@ -513,8 +513,8 @@ export default function ProfilePage() {
                                   </h3>
                                   <div className="flex items-center space-x-2 mt-1">
                                     <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                      item.inStock 
-                                        ? 'bg-primary-100 text-primary-800' 
+                                      item.inStock
+                                        ? 'bg-primary-100 text-primary-800'
                                         : 'bg-red-100 text-red-800'
                                     }`}>
                                       {item.inStock ? 'In Stock' : 'Out of Stock'}
@@ -526,7 +526,7 @@ export default function ProfilePage() {
                                     )}
                                   </div>
                                 </div>
-                                
+
                                 <div className="text-right">
                                   <div className="font-bold text-slate-900 text-sm md:text-base">
                                     ৳{item.price}
@@ -544,7 +544,7 @@ export default function ProfilePage() {
                                 <div className="text-xs text-slate-600">
                                   Saved for later
                                 </div>
-                                
+
                                 <div className="flex items-center space-x-2">
                                   <Button
                                     variant="outline"

@@ -41,7 +41,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MobileTabbedMenu from "./MobileTabbedMenu";
-import WellRiseLogo from "@/lib/assets/images/wellrise.png"
+import WellRiseLogo from "@/lib/assets/images/muscarimart.jpg"
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -81,15 +81,15 @@ export default function Header() {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-primary/90 via-secondary/90 to-primary/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-18 sm:h-20 md:h-22 lg:h-26 xl:h-28">
             <div className="lg:hidden w-10 h-10" />
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src={settings?.logo1 || WellRiseLogo?.src}
                 alt={settings?.siteName || 'Muscari Mart'}
-                width={120}
-                height={40}
-                className="h-8 lg:h-10 w-auto object-contain"
+                width={200}
+                height={80}
+                className="h-12 sm:h-14 md:h-16 lg:h-20 xl:h-24 w-auto object-contain"
                 priority
               />
             </Link>
@@ -119,7 +119,7 @@ export default function Header() {
         suppressHydrationWarning
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-18 sm:h-20 md:h-22 lg:h-26 xl:h-28">
             {/* Mobile Layout: Menu (left) | Logo (center) | Search & Cart (right) */}
             <div className="flex items-center justify-between w-full lg:justify-start">
               {/* Mobile Hamburger Menu - Left Side */}
@@ -165,9 +165,9 @@ export default function Header() {
                   <Image
                     src={settings?.logo1 || WellRiseLogo?.src}
                     alt={settings?.siteName || 'Muscari Mart'}
-                    width={120}
-                    height={40}
-                    className="h-8 lg:h-10 w-auto object-contain"
+                    width={200}
+                    height={80}
+                    className="h-12 sm:h-14 md:h-16 lg:h-20 xl:h-24 w-auto object-contain"
                     priority
                   />
                 </motion.div>

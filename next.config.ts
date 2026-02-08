@@ -75,7 +75,7 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/wellrise',
+        source: '/muscarimart',
         destination: '/',
         permanent: true,
       },

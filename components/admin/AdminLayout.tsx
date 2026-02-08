@@ -281,7 +281,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                       className="flex items-center space-x-2 min-w-0"
                     >
                       <Image
-                        src={settings?.logo1 || '/wellrise.png'}
+                        src={settings?.logo1 || '/muscarimart.png'}
                         alt={settings?.siteName || 'Muscari Mart'}
                         width={120}
                         height={32}

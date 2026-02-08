@@ -17,7 +17,7 @@ const alertVariants = cva(
         warning: 'border-sandy-400/50 bg-sandy-50 text-sandy-800 [&>svg]:text-sandy-600',
         info: 'border-info/50 bg-info/5 text-info [&>svg]:text-info',
         
-        // Primary and secondary variants using burnt sienna palette
+        // Primary and secondary variants using forest green & gold palette
         primary: 'border-primary-300 bg-primary-50 text-primary-800 [&>svg]:text-primary-600',
         secondary: 'border-secondary-300 bg-secondary-50 text-secondary-800 [&>svg]:text-secondary-600',
         

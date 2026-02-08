@@ -8,10 +8,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        // Primary variant - Burnt Sienna
+        // Primary variant - Deep Forest Green
         default: 'border-transparent bg-primary text-primary-foreground hover:bg-primary-700 shadow-sm',
         
-        // Secondary variant - Saddle Brown
+        // Secondary variant - Metallic Gold
         secondary: 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary-700 shadow-sm',
         
         // Supporting color variants

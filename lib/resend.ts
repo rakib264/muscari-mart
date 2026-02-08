@@ -1,14 +1,15 @@
-import { Resend } from 'resend';
-import createLogger from './logger';
-import { getEmailSettings } from './utils/email-settings';
+import { Resend } from "resend";
+import createLogger from "./logger";
+import { getEmailSettings } from "./utils/email-settings";
 
 // Configure Winston logger
-const logger = createLogger('resend-service');
+const logger = createLogger("resend-service");
 
 // Resend configuration
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_GGhRtid5_N8oEbnNjEAQMWunrG3pVsJBn';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@wellrise.com';
-const FROM_NAME = process.env.FROM_NAME || 'Muscari Mart';
+const RESEND_API_KEY =
+  process.env.RESEND_API_KEY || "re_GGhRtid5_N8oEbnNjEAQMWunrG3pVsJBn";
+const FROM_EMAIL = process.env.FROM_EMAIL || "noreply@muscarimart.com";
+const FROM_NAME = process.env.FROM_NAME || "Muscari Mart";
 
 interface EmailTemplateData {
   siteName: string;
@@ -34,83 +35,83 @@ class ResendService {
   private getEmailStyles(data: EmailTemplateData): string {
     return `
       <style>
-        body { 
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
-          line-height: 1.6; 
-          color: #333; 
-          margin: 0; 
-          padding: 0; 
-          background-color: #f8f9fa; 
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          margin: 0;
+          padding: 0;
+          background-color: #f8f9fa;
         }
-        .container { 
-          max-width: 600px; 
-          margin: 0 auto; 
-          background: white; 
-          border-radius: 12px; 
-          overflow: hidden; 
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .header { 
-          background: linear-gradient(135deg, ${data.primaryColor} 0%, ${data.secondaryColor || data.primaryColor} 100%); 
-          color: white; 
-          padding: 40px 30px; 
-          text-align: center; 
+        .header {
+          background: linear-gradient(135deg, ${data.primaryColor} 0%, ${data.secondaryColor || data.primaryColor} 100%);
+          color: white;
+          padding: 40px 30px;
+          text-align: center;
         }
-        .logo { 
-          max-width: 150px; 
-          height: auto; 
-          margin-bottom: 20px; 
+        .logo {
+          max-width: 150px;
+          height: auto;
+          margin-bottom: 20px;
         }
-        .content { 
-          padding: 40px 30px; 
+        .content {
+          padding: 40px 30px;
         }
-        .footer { 
-          background: #f8f9fa; 
-          padding: 30px; 
-          text-align: center; 
-          color: #6c757d; 
-          font-size: 14px; 
-          border-top: 1px solid #e9ecef; 
+        .footer {
+          background: #f8f9fa;
+          padding: 30px;
+          text-align: center;
+          color: #6c757d;
+          font-size: 14px;
+          border-top: 1px solid #e9ecef;
         }
-        h1, h2, h3 { 
-          margin-top: 0; 
+        h1, h2, h3 {
+          margin-top: 0;
         }
-        .btn { 
-          display: inline-block; 
-          padding: 12px 30px; 
-          background: ${data.primaryColor}; 
-          color: white; 
-          text-decoration: none; 
-          border-radius: 6px; 
-          font-weight: 600; 
-          margin: 20px 0; 
+        .btn {
+          display: inline-block;
+          padding: 12px 30px;
+          background: ${data.primaryColor};
+          color: white;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 600;
+          margin: 20px 0;
         }
-        .invoice-details { 
-          background: #f8f9fa; 
-          padding: 20px; 
-          border-radius: 8px; 
-          margin: 20px 0; 
+        .invoice-details {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
         }
-        .order-items { 
-          border: 1px solid #e9ecef; 
-          border-radius: 8px; 
-          overflow: hidden; 
-          margin: 20px 0; 
+        .order-items {
+          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          overflow: hidden;
+          margin: 20px 0;
         }
-        .order-item { 
-          padding: 15px; 
-          border-bottom: 1px solid #e9ecef; 
-          display: flex; 
-          justify-content: space-between; 
-          align-items: center; 
+        .order-item {
+          padding: 15px;
+          border-bottom: 1px solid #e9ecef;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
-        .order-item:last-child { 
-          border-bottom: none; 
+        .order-item:last-child {
+          border-bottom: none;
         }
-        .total-row { 
-          background: #f8f9fa; 
-          font-weight: bold; 
-          font-size: 18px; 
+        .total-row {
+          background: #f8f9fa;
+          font-weight: bold;
+          font-size: 18px;
         }
       </style>
     `;
@@ -122,7 +123,7 @@ class ResendService {
   private getEmailHeader(data: EmailTemplateData, title: string): string {
     const logoHtml = data.logo
       ? `<img src="${data.logo}" alt="${data.siteName}" class="logo" />`
-      : '';
+      : "";
 
     return `
       <div class="header">
@@ -141,7 +142,7 @@ class ResendService {
         <p style="margin: 0 0 10px 0;">
           <strong>${data.siteName}</strong>
         </p>
-        ${data.address ? `<p style="margin: 5px 0;">${data.address}</p>` : ''}
+        ${data.address ? `<p style="margin: 5px 0;">${data.address}</p>` : ""}
         <p style="margin: 5px 0;">
           Email: ${data.contactEmail} | Phone: ${data.contactPhone}
         </p>
@@ -161,7 +162,12 @@ class ResendService {
       customerName: string;
       orderNumber: string;
       orderDate: string;
-      items?: Array<{ name: string; quantity: number; price: number; total: number }>;
+      items?: Array<{
+        name: string;
+        quantity: number;
+        price: number;
+        total: number;
+      }>;
       subtotal?: number;
       shippingCost?: number;
       total: number | string;
@@ -172,17 +178,20 @@ class ResendService {
         phone: string;
         address: string;
       };
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
-      const itemsHtml = data.items ? data.items.map(item => `
+      const itemsHtml = data.items
+        ? data.items
+            .map(
+              (item) => `
         <div class="order-item">
           <div>
             <strong>${item.name}</strong><br>
@@ -190,7 +199,10 @@ class ResendService {
           </div>
           <div>৳${(item.price * item.quantity).toLocaleString()}</div>
         </div>
-      `).join('') : '';
+      `,
+            )
+            .join("")
+        : "";
 
       const html = `
         <!DOCTYPE html>
@@ -203,23 +215,25 @@ class ResendService {
         </head>
         <body>
           <div class="container">
-            ${this.getEmailHeader(templateData, 'Order Confirmation')}
-            
+            ${this.getEmailHeader(templateData, "Order Confirmation")}
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">Thank you for your order!</h2>
               <p>Hello ${data.customerName},</p>
               <p>We've received your order and it's being processed. Here are your order details:</p>
-              
+
               <div class="invoice-details">
                 <h3 style="margin-top: 0;">Order Details</h3>
                 <p><strong>Order Number:</strong> ${data.orderNumber}</p>
                 <p><strong>Order Date:</strong> ${data.orderDate}</p>
-                <p><strong>Payment Method:</strong> ${data.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment'}</p>
-                <p><strong>Delivery Type:</strong> ${data.deliveryType.replace('-', ' ')}</p>
+                <p><strong>Payment Method:</strong> ${data.paymentMethod === "cod" ? "Cash on Delivery" : "Online Payment"}</p>
+                <p><strong>Delivery Type:</strong> ${data.deliveryType.replace("-", " ")}</p>
                 <p><strong>Total Amount:</strong> ${data.total}</p>
               </div>
 
-              ${itemsHtml ? `
+              ${
+                itemsHtml
+                  ? `
                 <h3>Order Items</h3>
                 <div class="order-items">
                   ${itemsHtml}
@@ -228,7 +242,9 @@ class ResendService {
                     <div>${data.total}</div>
                   </div>
                 </div>
-              ` : ''}
+              `
+                  : ""
+              }
 
               <p>If you have any questions, please don't hesitate to contact us.</p>
             </div>
@@ -239,34 +255,34 @@ class ResendService {
         </html>
       `;
 
-      console.log('📧 Sending email via Resend:', {
+      console.log("📧 Sending email via Resend:", {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
-        subject: `Order Confirmation - ${data.orderNumber} - ${emailSettings.siteName}`
+        subject: `Order Confirmation - ${data.orderNumber} - ${emailSettings.siteName}`,
       });
 
       const result = await this.resend.emails.send({
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `Order Confirmation - ${data.orderNumber} - ${emailSettings.siteName}`,
-        html
+        html,
       });
 
-      console.log('📧 Resend response:', {
+      console.log("📧 Resend response:", {
         success: !!result.data?.id,
         emailId: result.data?.id,
-        error: result.error
+        error: result.error,
       });
 
       logger.info(`Order confirmation email sent successfully`, {
         to,
         orderNumber: data.orderNumber,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
     } catch (error) {
-      console.error('❌ Resend error:', error);
+      console.error("❌ Resend error:", error);
       logger.error(`Error sending order confirmation email to ${to}:`, error);
       return false;
     }
@@ -289,14 +305,14 @@ class ResendService {
       filename: string;
       content: Buffer | string;
       contentType: string;
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
       const html = `
@@ -310,19 +326,19 @@ class ResendService {
         </head>
         <body>
           <div class="container">
-            ${this.getEmailHeader(templateData, 'Invoice')}
-            
+            ${this.getEmailHeader(templateData, "Invoice")}
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">Your Invoice is Ready</h2>
               <p>Hello ${data.customerName},</p>
               <p>Please find attached the invoice for your recent order.</p>
-              
+
               <div class="invoice-details">
                 <h3 style="margin-top: 0;">Invoice Details</h3>
                 <p><strong>Order Number:</strong> ${data.orderNumber}</p>
                 <p><strong>Order Date:</strong> ${data.orderDate}</p>
-                <p><strong>Payment Method:</strong> ${data.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment'}</p>
-                <p><strong>Delivery Type:</strong> ${data.deliveryType.replace('-', ' ')}</p>
+                <p><strong>Payment Method:</strong> ${data.paymentMethod === "cod" ? "Cash on Delivery" : "Online Payment"}</p>
+                <p><strong>Delivery Type:</strong> ${data.deliveryType.replace("-", " ")}</p>
                 <p><strong>Total Amount:</strong> ${data.total}</p>
               </div>
 
@@ -340,14 +356,16 @@ class ResendService {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `Invoice for Order ${data.orderNumber} - ${emailSettings.siteName}`,
-        html
+        html,
       };
 
       if (attachment) {
-        emailData.attachments = [{
-          filename: attachment.filename,
-          content: attachment.content
-        }];
+        emailData.attachments = [
+          {
+            filename: attachment.filename,
+            content: attachment.content,
+          },
+        ];
       }
 
       const result = await this.resend.emails.send(emailData);
@@ -355,7 +373,7 @@ class ResendService {
       logger.info(`Invoice email sent successfully`, {
         to,
         orderNumber: data.orderNumber,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
@@ -373,22 +391,24 @@ class ResendService {
     data: {
       userName: string;
       otp: string;
-      type: 'password_reset' | 'email_verification';
-    }
+      type: "password_reset" | "email_verification";
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
-      const isPasswordReset = data.type === 'password_reset';
-      const title = isPasswordReset ? 'Password Reset Request' : 'Email Verification';
-      const message = isPasswordReset 
-        ? 'We received a request to reset your password. Use the verification code below to proceed:'
-        : 'Please verify your email address using the code below:';
+      const isPasswordReset = data.type === "password_reset";
+      const title = isPasswordReset
+        ? "Password Reset Request"
+        : "Email Verification";
+      const message = isPasswordReset
+        ? "We received a request to reset your password. Use the verification code below to proceed:"
+        : "Please verify your email address using the code below:";
 
       const html = `
         <!DOCTYPE html>
@@ -399,30 +419,30 @@ class ResendService {
           <title>${title}</title>
           ${this.getEmailStyles(templateData)}
           <style>
-            .otp-box { 
-              background: #f8f9fa; 
-              padding: 30px; 
-              border-radius: 12px; 
-              margin: 30px 0; 
-              text-align: center; 
-              border: 2px dashed ${templateData.primaryColor}; 
+            .otp-box {
+              background: #f8f9fa;
+              padding: 30px;
+              border-radius: 12px;
+              margin: 30px 0;
+              text-align: center;
+              border: 2px dashed ${templateData.primaryColor};
             }
-            .otp-code { 
-              font-size: 36px; 
-              font-weight: bold; 
-              color: ${templateData.primaryColor}; 
-              letter-spacing: 8px; 
-              font-family: 'Courier New', monospace; 
-              margin: 20px 0; 
+            .otp-code {
+              font-size: 36px;
+              font-weight: bold;
+              color: ${templateData.primaryColor};
+              letter-spacing: 8px;
+              font-family: 'Courier New', monospace;
+              margin: 20px 0;
               display: block;
             }
-            .warning { 
-              background: #fff3cd; 
-              border: 1px solid #ffeaa7; 
-              color: #856404; 
-              padding: 20px; 
-              border-radius: 8px; 
-              margin: 20px 0; 
+            .warning {
+              background: #fff3cd;
+              border: 1px solid #ffeaa7;
+              color: #856404;
+              padding: 20px;
+              border-radius: 8px;
+              margin: 20px 0;
               border-left: 4px solid #ffc107;
             }
           </style>
@@ -430,12 +450,12 @@ class ResendService {
         <body>
           <div class="container">
             ${this.getEmailHeader(templateData, title)}
-            
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">${title}</h2>
               <p>Hello ${data.userName},</p>
               <p>${message}</p>
-              
+
               <div class="otp-box">
                 <h3 style="margin-top: 0; color: ${templateData.primaryColor};">Verification Code</h3>
                 <span class="otp-code">${data.otp}</span>
@@ -464,13 +484,13 @@ class ResendService {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `${title} - ${emailSettings.siteName}`,
-        html
+        html,
       });
 
       logger.info(`OTP email sent successfully`, {
         to,
         type: data.type,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
@@ -489,14 +509,14 @@ class ResendService {
     data: {
       title: string;
       content: string;
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
       const html = `
@@ -510,8 +530,8 @@ class ResendService {
         </head>
         <body>
           <div class="container">
-            ${this.getEmailHeader(templateData, 'Admin Notification')}
-            
+            ${this.getEmailHeader(templateData, "Admin Notification")}
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">${data.title}</h2>
               ${data.content}
@@ -530,13 +550,13 @@ class ResendService {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `[${emailSettings.siteName}] ${subject}`,
-        html
+        html,
       });
 
       logger.info(`Admin notification sent successfully`, {
         to,
         subject,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
@@ -556,14 +576,14 @@ class ResendService {
       email: string;
       subject: string;
       message: string;
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
       const html = `
@@ -577,12 +597,12 @@ class ResendService {
         </head>
         <body>
           <div class="container">
-            ${this.getEmailHeader(templateData, 'Contact Form Submission')}
-            
+            ${this.getEmailHeader(templateData, "Contact Form Submission")}
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">New Contact Form Message</h2>
               <p>You have received a new message through your website contact form:</p>
-              
+
               <div class="invoice-details">
                 <h3 style="margin-top: 0;">Message Details</h3>
                 <p><strong>Name:</strong> ${data.name}</p>
@@ -605,11 +625,11 @@ class ResendService {
         </html>
       `;
 
-      console.log('📧 Sending email via Resend:', {
+      console.log("📧 Sending email via Resend:", {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `[${emailSettings.siteName}] ${data.subject}`,
-        replyTo: `${data.name} <${data.email}>`
+        replyTo: `${data.name} <${data.email}>`,
       });
 
       const result = await this.resend.emails.send({
@@ -617,24 +637,24 @@ class ResendService {
         to: [to],
         subject: `[${emailSettings.siteName}] ${data.subject}`,
         html,
-        replyTo: `${data.name} <${data.email}>`
+        replyTo: `${data.name} <${data.email}>`,
       });
 
-      console.log('📧 Resend response:', {
+      console.log("📧 Resend response:", {
         success: !!result.data?.id,
         emailId: result.data?.id,
-        error: result.error
+        error: result.error,
       });
 
       logger.info(`Contact form notification sent successfully`, {
         to,
         senderEmail: data.email,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
     } catch (error) {
-      console.error('❌ Resend error:', error);
+      console.error("❌ Resend error:", error);
       logger.error(`Error sending contact form notification to ${to}:`, error);
       return false;
     }
@@ -649,34 +669,38 @@ class ResendService {
       customerName: string;
       requestId: string;
       orderId: string;
-      type: 'return' | 'exchange';
+      type: "return" | "exchange";
       products: Array<{
         productName: string;
         quantity: number;
         variant?: string;
         reason: string;
       }>;
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
-      const typeText = data.type === 'return' ? 'Return' : 'Exchange';
-      const productsHtml = data.products.map(product => `
+      const typeText = data.type === "return" ? "Return" : "Exchange";
+      const productsHtml = data.products
+        .map(
+          (product) => `
         <div class="order-item">
           <div>
             <strong>${product.productName}</strong><br>
-            ${product.variant ? `<small>Variant: ${product.variant}</small><br>` : ''}
+            ${product.variant ? `<small>Variant: ${product.variant}</small><br>` : ""}
             <small>Qty: ${product.quantity}</small><br>
             <small style="color: #666;">Reason: ${product.reason}</small>
           </div>
         </div>
-      `).join('');
+      `,
+        )
+        .join("");
 
       const html = `
         <!DOCTYPE html>
@@ -690,12 +714,12 @@ class ResendService {
         <body>
           <div class="container">
             ${this.getEmailHeader(templateData, `${typeText} Request Confirmation`)}
-            
+
             <div class="content">
               <h2 style="color: ${templateData.primaryColor};">${typeText} Request Received</h2>
               <p>Hello ${data.customerName},</p>
               <p>We've received your ${data.type} request and it's being processed. Here are the details:</p>
-              
+
               <div class="invoice-details">
                 <h3 style="margin-top: 0;">Request Details</h3>
                 <p><strong>Request ID:</strong> ${data.requestId}</p>
@@ -723,18 +747,21 @@ class ResendService {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `${typeText} Request Confirmation - ${data.requestId} - ${emailSettings.siteName}`,
-        html
+        html,
       });
 
       logger.info(`${typeText} confirmation email sent successfully`, {
         to,
         requestId: data.requestId,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
     } catch (error) {
-      logger.error(`Error sending ${data.type} confirmation email to ${to}:`, error);
+      logger.error(
+        `Error sending ${data.type} confirmation email to ${to}:`,
+        error,
+      );
       return false;
     }
   }
@@ -748,23 +775,29 @@ class ResendService {
       customerName: string;
       requestId: string;
       orderId: string;
-      type: 'return' | 'exchange';
-      status: 'approved' | 'rejected' | 'resolved';
+      type: "return" | "exchange";
+      status: "approved" | "rejected" | "resolved";
       adminNotes?: string;
       resolutionNotes?: string;
-    }
+    },
   ): Promise<boolean> {
     try {
       const emailSettings = await getEmailSettings();
 
       const templateData: EmailTemplateData = {
         ...emailSettings,
-        ...data
+        ...data,
       };
 
-      const typeText = data.type === 'return' ? 'Return' : 'Exchange';
-      const statusText = data.status.charAt(0).toUpperCase() + data.status.slice(1);
-      const statusColor = data.status === 'approved' ? '#10b981' : data.status === 'rejected' ? '#ef4444' : '#3b82f6';
+      const typeText = data.type === "return" ? "Return" : "Exchange";
+      const statusText =
+        data.status.charAt(0).toUpperCase() + data.status.slice(1);
+      const statusColor =
+        data.status === "approved"
+          ? "#10b981"
+          : data.status === "rejected"
+            ? "#ef4444"
+            : "#3b82f6";
 
       const html = `
         <!DOCTYPE html>
@@ -778,12 +811,12 @@ class ResendService {
         <body>
           <div class="container">
             ${this.getEmailHeader(templateData, `${typeText} Request ${statusText}`)}
-            
+
             <div class="content">
               <h2 style="color: ${statusColor};">${typeText} Request ${statusText}</h2>
               <p>Hello ${data.customerName},</p>
               <p>Your ${data.type} request has been ${data.status}. Here are the details:</p>
-              
+
               <div class="invoice-details">
                 <h3 style="margin-top: 0;">Request Details</h3>
                 <p><strong>Request ID:</strong> ${data.requestId}</p>
@@ -793,19 +826,27 @@ class ResendService {
                 <p><strong>Updated Date:</strong> ${new Date().toLocaleDateString()}</p>
               </div>
 
-              ${data.adminNotes ? `
+              ${
+                data.adminNotes
+                  ? `
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid ${templateData.primaryColor};">
                   <h4 style="margin-top: 0;">Admin Notes:</h4>
                   <p style="white-space: pre-wrap; margin-bottom: 0;">${data.adminNotes}</p>
                 </div>
-              ` : ''}
+              `
+                  : ""
+              }
 
-              ${data.resolutionNotes ? `
+              ${
+                data.resolutionNotes
+                  ? `
                 <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
                   <h4 style="margin-top: 0;">Resolution Notes:</h4>
                   <p style="white-space: pre-wrap; margin-bottom: 0;">${data.resolutionNotes}</p>
                 </div>
-              ` : ''}
+              `
+                  : ""
+              }
 
               <p>If you have any questions about this update, please contact our customer support.</p>
             </div>
@@ -820,19 +861,22 @@ class ResendService {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [to],
         subject: `${typeText} Request ${statusText} - ${data.requestId} - ${emailSettings.siteName}`,
-        html
+        html,
       });
 
       logger.info(`${typeText} status update email sent successfully`, {
         to,
         requestId: data.requestId,
         status: data.status,
-        messageId: result.data?.id
+        messageId: result.data?.id,
       });
 
       return true;
     } catch (error) {
-      logger.error(`Error sending ${data.type} status update email to ${to}:`, error);
+      logger.error(
+        `Error sending ${data.type} status update email to ${to}:`,
+        error,
+      );
       return false;
     }
   }

@@ -60,11 +60,11 @@ interface ReturnRequest {
 const getStatusColor = (status: string) => {
   const colors: { [key: string]: string } = {
     pending: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200',
-    approved: 'bg-green-100 text-green-800 hover:bg-green-200',
-    processing: 'bg-blue-100 text-blue-800 hover:bg-blue-200',
-    shipped: 'bg-purple-100 text-purple-800 hover:bg-purple-200',
-    delivered: 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200',
-    completed: 'bg-green-100 text-green-800 hover:bg-green-200',
+    approved: 'bg-primary-100 text-primary-800 hover:bg-primary-200',
+    processing: 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200',
+    shipped: 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200',
+    delivered: 'bg-primary-100 text-primary-800 hover:bg-primary-200',
+    completed: 'bg-primary-100 text-primary-800 hover:bg-primary-200',
     rejected: 'bg-red-100 text-red-800 hover:bg-red-200',
     cancelled: 'bg-gray-100 text-gray-800 hover:bg-gray-200'
   };
@@ -143,7 +143,7 @@ export default function ReturnsSection() {
   if (loading) {
     return (
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-primary-600 to-violet-600 text-white p-8">
+        <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
           <CardTitle className="text-2xl text-white font-semibold flex items-center">
             <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl mr-3">
               <Package className="text-white" size={20} />
@@ -165,7 +165,7 @@ export default function ReturnsSection() {
     <div className="space-y-6">
       {/* Header */}
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl overflow-hidden">
-        {/* <CardHeader className="bg-gradient-to-r from-primary-600 to-violet-600 text-white p-8">
+        {/* <CardHeader className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white p-8">
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl text-white font-semibold flex items-center">
               <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl mr-3">
@@ -192,7 +192,7 @@ export default function ReturnsSection() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-primary-500 to-violet-500 rounded-lg mx-auto mb-2">
+                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg mx-auto mb-2">
                     <StatusIcon className="text-white" size={16} />
                   </div>
                   <div className="text-2xl font-bold text-slate-900">{count}</div>
@@ -263,7 +263,7 @@ export default function ReturnsSection() {
               </p>
               {!searchTerm && filterStatus === 'all' && (
                 <Link href="/returns">
-                  <Button className="bg-gradient-to-r from-primary-600 to-violet-600 hover:from-primary-700 hover:to-violet-700 text-white px-6 py-3 rounded-xl">
+                  <Button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-xl">
                     <Plus className="w-4 h-4 mr-2" />
                     Submit Your First Request
                   </Button>
@@ -286,7 +286,7 @@ export default function ReturnsSection() {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-3">
-                            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-primary-500 to-violet-500 rounded-lg">
+                            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg">
                               <StatusIcon className="text-white" size={18} />
                             </div>
                             <div>
