@@ -156,7 +156,7 @@ function addFaqStructuredData() {
         name: 'What is Muscari Mart?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Muscari Mart is a women's wear brand specializing in luxury, trendy, and casual sarees, delivering premium quality and elegant designs for customers in Bangladesh and worldwide.'
+          text: 'Muscari Mart is a women\'s wear brand specializing in luxury, trendy, and casual sarees, delivering premium quality and elegant designs for customers in Bangladesh and worldwide.'
         }
       },
       {

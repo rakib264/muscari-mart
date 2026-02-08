@@ -1,11 +1,11 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://www.wellrise.com',
+  siteUrl: 'https://www.muscarimart.com',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   robotsTxtOptions: {
     additionalSitemaps: [
-      'https://www.wellrise.com/sitemap.xml',
+      'https://www.muscarimart.com/sitemap.xml',
     ],
     policies: [
       {

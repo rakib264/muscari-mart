@@ -29,7 +29,7 @@ export async function generateMetadata({
     const categoryData = category as any;
     const title = categoryData.metaTitle || `${categoryData.name} | Muscari Mart`;
     const description = categoryData.metaDescription || categoryData.description || 
-      `Browse ${categoryData.name} at Muscari Mart. Premium quality sarees and women's wear collection.`;
+      `Browse ${categoryData.name} at Muscari Mart. Premium quality sarees and women\'s wear collection.`;
     
     const parentCategory = (categoryData.parent as any)?.name;
     const       breadcrumbs = parentCategory 

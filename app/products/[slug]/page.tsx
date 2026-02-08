@@ -30,7 +30,7 @@ export async function generateMetadata({
     const productData = product as any;
     const title = productData.metaTitle || `${productData.name} | Muscari Mart`;
     const description = productData.metaDescription || productData.shortDescription || 
-      (productData.description ? productData.description.substring(0, 160).replace(/<[^>]*>/g, '') : `Buy ${productData.name} at Muscari Mart. Premium quality sarees and women's wear.`);
+      (productData.description ? productData.description.substring(0, 160).replace(/<[^>]*>/g, '') : `Buy ${productData.name} at Muscari Mart. Premium quality sarees and women\'s wear.`);
     
     const images = productData.images && productData.images.length > 0 
       ? productData.images 
