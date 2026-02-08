@@ -1,0 +1,21 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /debug/
+Disallow: /test*
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /debug/
+Disallow: /test*
+
+# Host
+Host: https://www.wellrise.com
+
+# Sitemaps
+Sitemap: https://www.wellrise.com/sitemap.xml
