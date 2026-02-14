@@ -9,6 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useSettings } from '@/hooks/use-settings';
 import { AnimatePresence, motion } from 'framer-motion';
+import MuscariMartLogo from "@/lib/assets/images/muscarimart.jpg"
 import {
     BarChart3,
     Bell,
@@ -219,7 +220,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     item.roles.includes(session?.user?.role || '')
   );
 
-  // console.log("session?.user", session?.user)
+  console.log("Logo", settings?.logo1 || MuscariMartLogo)
 
 
   const unreadCount = notifications.filter(n => n.unread).length;
@@ -263,7 +264,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           className="fixed left-0 top-0 h-full bg-white border-r border-gray-200 z-40 md:relative md:z-auto md:translate-x-0 flex-shrink-0 overflow-hidden"
         >
           {/* Desktop/Tablet Sidebar Content */}
-          <div className="flex items-center justify-between p-4 border-b h-16 min-w-0">
+          <div className="flex items-center justify-center p-4 border-b h-20 md:h-24 lg:h-28 xl:h-32 min-w-0">
             <AnimatePresence mode="wait">
               {sidebarOpen ? (
                 <motion.div
@@ -281,11 +282,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                       className="flex items-center space-x-2 min-w-0"
                     >
                       <Image
-                        src={settings?.logo1 || '/muscarimart.png'}
+                        src={settings?.logo1 || MuscariMartLogo?.src}
                         alt={settings?.siteName || 'Muscari Mart'}
-                        width={120}
-                        height={32}
-                        className="h-8 w-auto flex-shrink-0 object-contain"
+                        width={160}
+                        height={48}
+                        className="h-8 md:h-10 lg:h-12 w-auto flex-shrink-0 object-contain"
                         priority
                       />
                     </motion.div>
@@ -302,11 +303,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 >
                   <Link href="/" className="flex items-center justify-center">
                     <Image
-                      src={settings?.logo1 || '/wellrise.png'}
+                      src={settings?.logo1 || MuscariMartLogo?.src}
                       alt={settings?.siteName || 'Muscari Mart'}
-                      width={32}
-                      height={32}
-                      className="h-8 w-8 object-contain"
+                      width={40}
+                      height={40}
+                      className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 object-contain"
                       priority
                     />
                   </Link>
@@ -453,7 +454,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 className="flex items-center space-x-2 min-w-0"
               >
                 <Image
-                  src={settings?.logo1 || '/wellrise.png'}
+                  src={settings?.logo1 || MuscariMartLogo?.src}
                   alt={settings?.siteName || 'Muscari Mart'}
                   width={120}
                   height={32}

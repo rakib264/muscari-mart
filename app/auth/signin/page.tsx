@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import WellRiseLogo from "@/lib/assets/images/muscarimart.jpg";
+import MuscariMartLogo from "@/lib/assets/images/muscarimart.jpg";
 
 interface AuthSettings {
   googleAuthEnabled: boolean;
@@ -185,7 +185,7 @@ export default function SignIn() {
                       ) : (
                         <div className="relative flex items-center justify-center">
                           <Image
-                            src={WellRiseLogo?.src}
+                            src={MuscariMartLogo?.src}
                             alt={siteName || "Muscari Mart"}
                             width={120}
                             height={40}

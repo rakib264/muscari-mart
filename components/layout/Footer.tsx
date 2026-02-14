@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import WellRiseLogo from "@/lib/assets/images/muscarimart.jpg";
+import MuscariMartLogo from "@/lib/assets/images/muscarimart.jpg";
 
 export default function Footer() {
   const { settings, loading } = useSettings();
@@ -81,7 +81,7 @@ export default function Footer() {
                 ) : (
                   <>
                     <Image
-                      src={settings?.logo1 || WellRiseLogo?.src}
+                      src={settings?.logo1 || MuscariMartLogo?.src}
                       alt={settings?.siteName || "Muscari Mart"}
                       width={240}
                       height={80}

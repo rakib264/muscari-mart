@@ -41,7 +41,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MobileTabbedMenu from "./MobileTabbedMenu";
-import WellRiseLogo from "@/lib/assets/images/muscarimart.jpg"
+import MuscariMartLogo from "@/lib/assets/images/muscarimart.jpg"
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ export default function Header() {
             <div className="lg:hidden w-10 h-10" />
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src={settings?.logo1 || WellRiseLogo?.src}
+                src={settings?.logo1 || MuscariMartLogo?.src}
                 alt={settings?.siteName || 'Muscari Mart'}
                 width={200}
                 height={80}
@@ -163,7 +163,7 @@ export default function Header() {
                   className="flex items-center space-x-2"
                 >
                   <Image
-                    src={settings?.logo1 || WellRiseLogo?.src}
+                    src={settings?.logo1 || MuscariMartLogo?.src}
                     alt={settings?.siteName || 'Muscari Mart'}
                     width={200}
                     height={80}

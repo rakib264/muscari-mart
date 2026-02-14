@@ -180,7 +180,7 @@ class SimplePDFService {
         doc.setTextColor(primaryColor);
         doc.setFontSize(16);
         doc.setFont("helvetica", "bold");
-        doc.text(companySettings.siteName || "WELLRISE", 22, 27);
+        doc.text(companySettings.siteName || "MUSCARI MART", 22, 27);
       }
 
       // Company tagline with elegant typography
